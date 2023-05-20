@@ -1,4 +1,4 @@
-/**S definiciones**/
+/**Seccion de  definiciones**/
 
 %{
 
@@ -6,7 +6,9 @@
 
 %}
 
-/**S de reglas**/
+/**Seccion de reglas**/
+
+/**Definicion de patrones regulares**/
 
 digito [0-9]
 
@@ -19,7 +21,6 @@ variableEnMayuscula [A-Z][a-zA-Z]{0,15}
 
 
 %%
-
 
 
 {char}						{return CHA;}
@@ -124,11 +125,11 @@ quieto 						{return STT;}
 
 \|\*([^*]|[*][^|])*\*\|				{/*Ignorar Comentarios*/}
 
+
 [ \t\n]						{/*ingonar espacios*/}
 
 .						{printf("Error Lexico: %s\n",yytext);}
 
 %%
 
-/**Sección de codigo de uaurio**/
-
+/**Sección de codigo de usuario**/
