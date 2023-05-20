@@ -1,4 +1,4 @@
-/**S definiciones**/
+/**Seccion de definiciones**/
 
 %{
 
@@ -14,16 +14,17 @@ void yyerror(char *s);
 
 %}
 
-
+/*definicion de tokens*/
 
 %token INT FLO CIF CEL IGU MEQ MAQ DIF APT CPT ACH CCH CFN GLO VPM VAR MDL CLS CCC IMP CIM PRI NAD VOC VCB NAT SIO NAG DIE RTN CTR CCA AFD EXC ASG DPT MMA MNE HTQ HQN RAL FAK ATR CHA MAS MEN DIV STT
 
 
 
-/**S de reglas**/
+/**Seccion de reglas**/
 
 %%
 
+/** Regla de inicio **/
 
 
 inicio  : 					
@@ -31,6 +32,7 @@ inicio  :
 	| GLO MDL VPM ACH linea CCH CCC		{printf("Lenguaje Correcto!\n");}
 
 
+/* Reglas para las líneas de código */
 
 linea	:		 
 
@@ -42,19 +44,17 @@ linea	:
 
     		
 
-
+/* Reglas para la importación de módulos */
 
 import  : IMP CIM CCC
 
-
+/* Reglas para la definición de métodos */
 
 method  : visibility NAD VAR APT CPT ACH in_method CCH
 
 	| visibility values APT CPT ACH in_method RTN VAR CCC CCH
 
-	
-
-	
+/* Reglas para el contenido dentro de un método */
 
 in_method : 
 
@@ -78,11 +78,7 @@ in_method :
 
   	  | in_method VAR masmenos CCC 	  
 
- 
-
-
-
-
+ /* Reglas para las estructuras condicionales */
 
 ifs	: ifsim			{printf("if Correcto!\n");}
 
@@ -90,9 +86,6 @@ ifs	: ifsim			{printf("if Correcto!\n");}
 
 
 
-
-
-   	
 
 ifsim   : CIF APT cond CPT ACH in_method CCH CFN 
 
@@ -105,20 +98,20 @@ ifelse	: CIF APT cond CPT ACH in_method CCH CEL ACH in_method CCH CFN
 	| CIF APT condword CPT ACH in_method CCH CEL ACH in_method CCH CFN
 
 
-
+/* Reglas para la estructura de bucle for */
 
 
 for     : AFD APT valuesnumb VAR ASG artim DPT cond DPT VAR masmenos CPT ACH in_method CCH 	{printf("For Correcto!\n");}
 
-
+/* Regla para la estructura de bucle while */
 
 while   : HTQ APT cond CPT ACH in_method CCH HQN 					{printf("While Correcto!\n");}
 
-
+/* Reglas para la estructura try-catch */
 
 trycatch  : CTR ACH in_method CCH CCA APT EXC VAR CPT ACH in_method CCH    		{printf("try/catch Correcto!\n");}
 
-
+/* Reglas para la definición de variables */
 
 def_var   : visibility values CCC							{printf("Definicion de variable Correcta!\n");}
 
@@ -144,12 +137,11 @@ def_var   : visibility values CCC							{printf("Definicion de variable Correcta
 
 
 
-
+/* Reglas para los valores booleanos */
 
 true_false : RAL
 
   	   | FAK		
-
 
 
 masmenos : MMA
@@ -157,12 +149,9 @@ masmenos : MMA
 	 | MNE	
 
 
-
 visibility 	: GLO
 
 		| PRI	
-
-	
 
 	
 
@@ -208,17 +197,17 @@ values 		: valuesnumb VAR
 
 valuesbool	: SIO
 
-		
+/* Reglas para los valores numéricos */		
 
 valuesnumb	: NAT
 
 		| NAG
 
-
+/* Reglas para los valores de punto flotante */
 
 valuesFlot	: DIE	
 
-
+/* Reglas para las operaciones aritméticas */
 
 artim	 	: artim MAS artim   
 
@@ -250,7 +239,7 @@ artimflo 	: artimflo MAS artimflo
 
 %%
 
-/**S codigo de usuario**/
+/**Seccion codigo de usuario**/
 
 void yyerror(char *s){
 
