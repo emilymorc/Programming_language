@@ -1,0 +1,9 @@
+rm milenguaje.tab.* lex.yy.c calc.exe
+
+bison -d milenguaje.y
+
+flex milenguaje.l
+
+gcc milenguaje.tab.c lex.yy.c -lfl -o calc.exe
+
+./calc.exe < ejLenguaje.x
